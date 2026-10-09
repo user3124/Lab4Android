@@ -29,13 +29,14 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "API_BASE_URL", "\"https://example.com\"")
         }
         debug {
             isMinifyEnabled = false
+            buildConfigField("String", "API_BASE_URL", "\"https://example.com\"")
         }
     }
 
-    // Настройка флаворов (разные версии одного и того же приложения    )
     flavorDimensions += "version"
     productFlavors {
         create("free") {
@@ -63,7 +64,7 @@ android {
 
     buildFeatures {
         compose = true
-        buildConfig = true // включена генерация BuildConfig
+        buildConfig = true
     }
 
     packaging {
@@ -74,8 +75,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":network"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
